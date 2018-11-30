@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.*;
 
 class test {
+    public static void printName() {
+        System.out.print("Print Name Called!");
+    }
+
     public static void main(String args[]) throws IOException {
         int arr[];
         Integer t, n;
@@ -18,15 +22,15 @@ class test {
         // Read Multiple Integers Line.
         String line = br.readLine();
         String[] strs = line.trim().split("\\s+");
+        int sum = 0;
 
         // Read the String in a Single Line while converting them into Integers..
         for (int i = 0; i < n; i++) {
             a[i] = Integer.parseInt(strs[i]);
+            sum += a[i];
         }
 
-        // Print the Intgers!
-        for (t = 0; t < strs.length; t++) {
-            System.out.println("Element at " + (t + 1) + " is " + strs[t]);
-        }
+        System.out.println(sum);
+        printName();
     }
 }
