@@ -70,7 +70,9 @@ class io {
         int s = a[2];
 
         for (t = 0; t < n; t++) {
-
+            for (j=t+1;j<k;j++) {
+                
+            }
         }
     }
 }
