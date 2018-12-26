@@ -24,23 +24,36 @@ class commonElements {
             c[t] = b[t1];
             t++;
         }
+
         int i1, j1;
         int count = 0;
 
-        for (t = 0; t < c.length; t++) {
-            for (i = 0; i < c.length - t; i++) {
-                if (t != i) {
-                    if (c[t] == c[i]) {
-                        count++;
-                        for (int u = t; u < c.length - 1; u++)
-                            c[u] = c[u + 1];
-                    }
-                }
+        // for (t = 0; t < c.length; t++) {
+        // for (i = 0; i < c.length - t; i++) {
+        // if (t != i) {
+        // if (c[t] == c[i]) {
+        // count++;
+        // for (int u = t; u < c.length - 1; u++)
+        // c[u] = c[u + 1];
+        // }
+        // }
+        // }
+        // }
+        int temp;
+        for (t = 0; t < c.length - 1; t++) {
+            // int cur = c[t];
+            int min = t;
+            for (j = t + 1; j < c.length; j++) {
+                if (c[j] < c[min])
+                    min = j;
             }
+            temp = c[min];
+            c[min] = c[t];
+            c[t] = temp;
         }
 
-        Arrays.sort(c);
-        for (int t1 = 0; t1 < c.length - count; t1++) {
+        // Arrays.sort(c);
+        for (int t1 = 0; t1 < c.length; t1++) {
             System.out.print(c[t1] + " ");
         }
 

@@ -2,8 +2,8 @@ import java.io.*;
 
 class pal {
     public static void main(String args[]) throws IOException {
-        BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-        String st = b.readLine();
+
+        String st = args[0];
         int i = 0, j = st.length() - 1;
         int count = 0;
         while (i < j) {
@@ -19,7 +19,5 @@ class pal {
             System.out.println("Palindrome");
         else
             System.out.println("Not a Palindrome!");
-
-        // System.out.println(st);
     }
 }
