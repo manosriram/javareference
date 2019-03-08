@@ -14,35 +14,46 @@ class Department {
     protected String deptHead;
 
     void registerDepartment(Department ob, int i) {
-        switch (i) {
-        case 1:
-            ob.dep = deptName[0];
-            break;
-        case 2:
-            ob.dep = deptName[1];
-            break;
-        case 3:
-            ob.dep = deptName[2];
-            break;
-        case 4:
-            ob.dep = deptName[3];
-            break;
-        case 5:
-            ob.dep = deptName[4];
-            break;
-        case 6:
-            ob.dep = deptName[5];
-            break;
-        }
+        ob.dep = deptName[i - 1];
+    }
+}
+
+class Student extends Department {
+    private long studentId;
+    private String studentName;
+    private int creditScore;
+
+    long getStudentId() {
+        return this.studentId;
+    }
+
+    void setStudentId(long id) {
+        this.studentId = id;
+    }
+
+    void setStudentName(String name) {
+        this.studentName = name;
+    }
+
+    String getStudentName() {
+        return this.studentName;
+    }
+
+    void setCreditScore(int score) {
+        this.creditScore = score;
+    }
+
+    int getCreditScore() {
+        return this.creditScore;
+    }
+
+    String getDep() {
+        return this.dep;
     }
 }
 
 // Class Student .
-class Student extends Department {
-
-    private long studentId;
-    private String studentName;
-    private int creditScore;
+class StudentManagement extends Student {
 
     // Checks if the ID of the Student is already registered or not.
     boolean checkStudent(long id[], long newId) {
@@ -54,10 +65,10 @@ class Student extends Department {
     }
 
     // Enrolls the Student to the List with Information.
-    int enrollStudent(long id[], Student ob, ArrayList<Student> arr, int count) {
+    int enrollStudent(long id[], StudentManagement ob, ArrayList<Student> arr, int count) {
         try {
-            if (checkStudent(id, ob.studentId) == true) {
-                id[count] = ob.studentId;
+            if (checkStudent(id, ob.getStudentId()) == true) {
+                id[count] = ob.getStudentId();
                 count++;
                 arr.add(ob);
             } else
@@ -70,17 +81,17 @@ class Student extends Department {
 
     // Storing Information in an Object before performing Checks.
     void takeStudent(String name, long id, int creditScore, Department d) {
-        this.studentId = id;
-        this.studentName = name;
+        this.setStudentId(id);
+        this.setCreditScore(creditScore);
+        this.setStudentName(name);
         this.dep = d.dep;
-        this.creditScore = creditScore;
     }
 
     // Sorting the ArrayList in Descending Order of Credit Score.
     void sortAr(ArrayList<Student> arr, Student o1, Student o2) {
         Collections.sort(arr, new Comparator<Student>() {
             public int compare(Student s1, Student s2) {
-                return Integer.valueOf(s2.creditScore).compareTo(s1.creditScore);
+                return Integer.valueOf(s2.getCreditScore()).compareTo(s1.getCreditScore());
             }
         });
 
@@ -90,10 +101,10 @@ class Student extends Department {
             System.out.println("----------------------------------------------------");
             System.out.println("Student " + (t + 1) + " : ");
             System.out.println();
-            System.out.println("Name : " + arr.get(t).studentName);
-            System.out.println("Department : " + arr.get(t).dep);
-            System.out.println("Id : " + arr.get(t).studentId);
-            System.out.println("Credit Score : " + arr.get(t).creditScore);
+            System.out.println("Name : " + arr.get(t).getStudentName());
+            System.out.println("Department : " + arr.get(t).getDep());
+            System.out.println("Id : " + arr.get(t).getStudentId());
+            System.out.println("Credit Score : " + arr.get(t).getCreditScore());
             System.out.println("----------------------------------------------------");
             System.out.println();
         }
@@ -110,7 +121,7 @@ class Student extends Department {
         for (int t = 0; t < arr.size(); t++) {
             if (arr.get(t).dep == deptName) { // If the Entered Department matches the department in the list.
                 count++;
-                System.out.println(count + " " + arr.get(t).studentName);
+                System.out.println(count + " " + arr.get(t).getStudentName());
                 System.out.println();
             }
         }
@@ -125,7 +136,7 @@ class Student extends Department {
     }
 }
 
-class CS1 {
+class Tester {
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         ArrayList<Student> arr = new ArrayList<Student>();
@@ -137,7 +148,7 @@ class CS1 {
         // Base Loop which runs until we exit.
         while (true) {
             System.out.println();
-            System.out.print("1.Enroll Student. 2.Get Students By Department. 3.Display All Students. 4.Exit : ");
+            System.out.print("1.Enroll Student\n2.Get Students By Department.\n3.Display All Students.\n4.Exit : ");
             ch = in.nextInt(); // get the option of the user.
 
             Department d = new Department();
@@ -145,13 +156,13 @@ class CS1 {
             long newId;
             int score;
 
-            Student s = new Student();
+            StudentManagement s = new StudentManagement();
 
             switch (ch) {
 
             case 1:
                 // Enroll Student .
-                Student o = new Student();
+                StudentManagement o = new StudentManagement();
 
                 // Get name of student from User.
                 System.out.print("Name : ");
@@ -159,6 +170,7 @@ class CS1 {
 
                 // Get Department of Student from User.
                 try {
+                    System.out.println();
                     System.out.print(
                             "Choose Department : \n1.CSE.\n2.ECE.\n3.EEE.\n4.Civil.\n5.Mechanical.\n6.Bio-Chem\n");
                     ch1 = in.nextInt();
@@ -219,8 +231,8 @@ class CS1 {
 
             case 3:
                 // Sort ArrayList in a descending order with respect to Credit Score.
-                Student o1 = new Student();
-                Student o2 = new Student();
+                StudentManagement o1 = new StudentManagement();
+                StudentManagement o2 = new StudentManagement();
                 s.sortAr(arr, o1, o2);
                 break;
 
